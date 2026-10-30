@@ -42,8 +42,21 @@ const path = require('node:path');
         assert(box.y >= -1 && box.y < height, `Anchor ${target} is visible`);
       }
       assert.equal(await page.locator('a[href^="mailto:"]').getAttribute('href'), 'mailto:nateceaton@gmail.com');
+      const project = page.locator('#projects article');
+      assert.equal(await project.locator('h3').innerText(), 'Feardetector');
+      assert(!/TBD|Projects to come/.test(await page.locator('#projects').innerText()));
+      assert.equal(await project.getAttribute('aria-labelledby'), await project.locator('h3').getAttribute('id'));
+      assert.deepEqual(await project.locator('a').evaluateAll(links => links.map(a => a.href)), [
+        'https://github.com/neaton21/feardetector',
+        'https://feardetector.neaton2.workers.dev/'
+      ]);
+      const allowedExternalLinks = new Set([
+        'https://github.com/neaton21',
+        'https://github.com/neaton21/feardetector',
+        'https://feardetector.neaton2.workers.dev/'
+      ]);
       for (const a of await page.locator('a[href^="https:"]').all()) {
-        assert.equal(await a.getAttribute('href'), 'https://github.com/neaton21');
+        assert(allowedExternalLinks.has(await a.getAttribute('href')));
       }
       await page.locator('footer a').click();
       assert.equal(await page.evaluate(() => scrollY), 0);

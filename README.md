@@ -16,7 +16,7 @@ The preview started during development serves the parent Downloads folder, so it
 
 ## Files
 
-- `index.html` — all visible text, navigation, links, and search/social metadata. Search for `EDIT:` and `PLACEHOLDER:` comments.
+- `index.html` — all visible text, navigation, links, and search/social metadata. Search for `EDIT:` comments.
 - `assets/styles.css` — design tokens, layout, responsive rules, keyboard focus, print, and reduced-motion styles.
 - `assets/favicon.svg` — small initial favicon.
 - `assets/social-card.png` — 1200 × 630 sharing image. This is a social preview, not a webpage background.
@@ -31,9 +31,11 @@ The preview started during development serves the parent Downloads folder, so it
 
 Edit the introduction and About sections in `index.html`. Update the `<title>`, description, Open Graph, and Twitter metadata if your headline changes. The degree in Cybersecurity is explicitly described as **planned**, not an earned credential or current enrollment.
 
-### Projects — the only visible placeholder
+### Projects
 
-The Projects section deliberately says **TBD / Projects to come**. No sample projects or accomplishments are represented as real. When you have a project, replace the `project-placeholder` block with an article like the following, filling every bracketed item with verified information:
+The Projects section features **Feardetector**, a browser-based scream challenge with optional on-device MediaPipe facial landmark tracking. It links to the [source repository](https://github.com/neaton21/feardetector) and [live demo](https://feardetector.neaton2.workers.dev/). Keep the description grounded in the repository: scores are entertainment estimates, not fear detection or calibrated sound measurements.
+
+To add another project, use an article like the following, filling every bracketed item with verified information:
 
 ```html
 <article class="project" aria-labelledby="project-example-title">
@@ -45,7 +47,7 @@ The Projects section deliberately says **TBD / Projects to come**. No sample pro
 </article>
 ```
 
-Use a unique heading ID for each project. Add a live-demo link only if one exists. Delete the placeholder block after adding real work; do not publish the bracketed template as real content.
+Use a unique heading ID for each project. Add a live-demo link only if one exists. Do not publish the bracketed template as real content.
 
 ### Links
 
@@ -61,7 +63,7 @@ Repository: **https://github.com/neaton21/neaton21.github.io**. Website: **https
 
 **Pushing to main publishes changes immediately, including the contact email address. Review updates before pushing.**
 
-1. Review the local preview and replace the optional project placeholder if desired.
+1. Review the local preview and verify the project descriptions and links.
 2. From this project folder, review and commit the files. If Git asks for your identity, configure your own name and GitHub-verified email; no identity has been silently configured for you.
 
    ```sh

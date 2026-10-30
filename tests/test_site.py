@@ -33,8 +33,20 @@ class SiteTests(unittest.TestCase):
                 self.assertTrue(href and href != '#', 'No dead placeholder links')
                 if href.startswith('#'):
                     self.assertIn(href[1:], ids)
-        for content in ['Nate Eaton', 'Niagara University', 'Cybersecurity', 'swim team', 'TBD', 'mailto:nateceaton@gmail.com', 'https://github.com/neaton21']:
+        for content in ['Nate Eaton', 'Niagara University', 'Cybersecurity', 'swim team', 'mailto:nateceaton@gmail.com', 'https://github.com/neaton21']:
             self.assertIn(content, text)
+
+    def test_projects_features_feardetector_instead_of_placeholder(self):
+        text = (ROOT / 'index.html').read_text()
+        section = text.split('id="projects"', 1)[1].split('</section>', 1)[0]
+        doc = Document(section)
+        self.assertIn('Feardetector', section)
+        self.assertNotIn('TBD', section)
+        self.assertNotIn('project-placeholder', section)
+        self.assertIn(('article', {'class': 'project', 'aria-labelledby': 'feardetector-title'}), doc.elements)
+        links = [attrs.get('href') for tag, attrs in doc.elements if tag == 'a']
+        self.assertIn('https://github.com/neaton21/feardetector', links)
+        self.assertIn('https://feardetector.neaton2.workers.dev/', links)
 
     def test_local_assets_and_accessibility_styles(self):
         doc = Document((ROOT / 'index.html').read_text())
